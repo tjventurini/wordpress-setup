@@ -1,0 +1,56 @@
+version: '3.8'
+
+# setup the network
+networks:
+  frontend:
+    external:
+      name: reverse-proxy
+  backend:
+    driver: bridge
+
+services:
+
+  wordpress:
+    depends_on:
+      - mysql
+    build: ./build/wordpress
+    user: "${UID}:${GID}"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      # # wordpress content
+      # - ./data/wordpress/wp-content:/var/www/html/wp-content
+      # # wordpress config
+      # - ./data/wordpress/wp-config.php:/var/www/html/wp-config.php
+      # full wordpress site
+      - ./data/wordpress:/var/www/html
+    # add the network to the service configuration
+    networks:
+      - frontend
+      - backend
+    # add the labels to the service configuration
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy"
+      # https
+      - "traefik.http.routers.wordpress-${SLUG}.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.wordpress-${SLUG}.entrypoints=websecure"
+      - "traefik.http.routers.wordpress-${SLUG}.tls=true"
+      - "traefik.http.routers.wordpress-${SLUG}.tls.certresolver=letsencrypt"
+
+  mysql:
+    image: mysql:5.7
+    user: "${UID}:${GID}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    # add the network to the service configuration
+    networks:
+      - backend
