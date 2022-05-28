@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 
-read -p "Enter project name please: " PROJECT_NAME
+# Setup colors
+ERROR='\033[0;31m'
+SUCCESS='\033[0;32m'
+WARN='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Get project dir
+read -p "${WARN}Enter project dir: ${NC}" PROJECT_DIR
 echo ""
-git clone https://github.com/tjventurini/wordpress-setup.git $PROJECT_NAME
-cd PROJECT_NAME
+
+# Clone repository
+git clone https://github.com/tjventurini/wordpress-setup.git $PROJECT_DIR
+
+# Enter project dir
+cd $PROJECT_DIR
+
+# Do stuff in project dir
 rm -rf .git
-echo "Done! 🚀"
+rm data/wordpress/.gitignore
+rm data/mysql/.gitignore
+
+# Final message
+echo "${SUCCESS}Done! 🚀${NC}"
