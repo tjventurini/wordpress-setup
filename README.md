@@ -11,7 +11,7 @@ This is a simple [WordPress](https://wordpress.org) setup using [Docker Compose]
 Run this command if you want to create a new project using this setup.
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-setup/master/remove-setup.sh | sudo bash
+wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-setup/master/remove-setup.sh | bash
 ```
 
 ### For development
