@@ -11,7 +11,7 @@ This is a simple [WordPress](https://wordpress.org) setup using [Docker Compose]
 Run these commands if you want to create a new project using this setup.
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-setup/main/scripts/remote-setup.sh | bash
+sh -c "$(wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-setup/main/scripts/remote-setup.sh)"
 ```
 
 ### For development
