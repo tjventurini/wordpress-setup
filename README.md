@@ -8,10 +8,14 @@ This is a simple [WordPress](https://wordpress.org) setup using [Docker Compose]
 
 ### For a new project
 
-Run this command if you want to create a new project using this setup.
+Run these commands if you want to create a new project using this setup.
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-setup/main/scripts/remote-setup.sh | bash
+PROJECT_NAME=project_name \
+&& git clone https://github.com/tjventurini/wordpress-setup.git $PROJECT_NAME \
+&& cd PROJECT_NAME \
+&& rm -rf .git \
+&& echo "Done! 🚀"
 ```
 
 ### For development
