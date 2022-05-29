@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Setup colors
-ERROR='\033[0;31m'
-SUCCESS='\033[0;32m'
-WARN='\033[0;33m'
-NC='\033[0m' # No Color
+ERROR=$(printf '\033[0;31m')
+SUCCESS=$(printf '\033[0;32m')
+WARN=$(printf '\033[0;33m')
+NC=$(printf '\033[0m') # No Color
 
 # Get project dir
 read -p "${WARN}Enter project dir: ${NC}" PROJECT_DIR
