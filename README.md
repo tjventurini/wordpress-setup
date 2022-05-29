@@ -19,3 +19,29 @@ bash -c "$(wget -qO- https://raw.githubusercontent.com/tjventurini/wordpress-set
 ```bash
 git clone git@github.com:tjventurini/wordpress-setup.git
 ```
+
+## Configuration
+
+At the time of writing this the configuration file `.env` includes the following values.
+
+```
+SLUG=wordpress
+DOMAIN=wordpress.localhost
+DB_ROOT_PASSWORD=secret
+DB_NAME=wordpress
+DB_USER=wordpress
+DB_PASSWORD=wordpress
+UID=1000
+GID=1000
+```
+
+## Commands
+
+```bash
+make init
+make up
+make start # alias for `make up`
+make down
+make stop # alias for `make down`
+make clear
+```
