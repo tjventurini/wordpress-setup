@@ -13,9 +13,11 @@ if [ ! -z "$1" ]; then
     case "$1" in
         --prod)
             ENVIRONMENT="prod"
+            break
             ;;
         --local)
             ENVIRONMENT="local"
+            break
             ;;
         *)
             showHelp
