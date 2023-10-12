@@ -8,24 +8,6 @@ function showHelp() {
     echo -e "${WARN}Usage (Makefile): make init${NC}"
 }
 
-# Get the correct environment if given.
-if [ ! -z "$1" ]; then
-    case "$1" in
-        --prod)
-            ENVIRONMENT="prod"
-            break
-            ;;
-        --local)
-            ENVIRONMENT="local"
-            break
-            ;;
-        *)
-            showHelp
-            exit 1
-            ;;
-    esac
-fi
-
 # Let the user select the environment if not given.
 if [ -z "$ENVIRONMENT" ]; then
     echo -e "${WARN}Select environment:${NC}"
