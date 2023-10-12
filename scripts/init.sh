@@ -45,8 +45,6 @@ else
     echo -e "${WARN}.env already exists, skipping...${NC}"
 fi
 
-docker-compose build && echo -e "${SUCCESS}Docker images built ✅${NC}"
-
 echo -e "${SUCCESS}Done! 🚀${NC}"
 echo -e "${WARN}Please update your '.env' file now 🧐${NC}"
 echo -e "${WARN}Afterwards you can execute 'make start' to start the service.${NC}"
