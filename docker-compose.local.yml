@@ -26,6 +26,14 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_DEBUG: ${WP_DEBUG}
       WP_URL: ${DOMAIN}
+      WPMS_MAILER: smtp
+      WPMS_SMTP_HOST: ${WPMS_SMTP_HOST}
+      WPMS_SMTP_PORT: ${WPMS_SMTP_PORT}
+      WPMS_SSL: ${WPMS_SSL}
+      WPMS_SMTP_AUTH: ${WPMS_SMTP_AUTH}
+      WPMS_SMTP_USER: ${WPMS_SMTP_USER}
+      WPMS_SMTP_PASS: ${WPMS_SMTP_PASS}
+      WPMS_SMTP_AUTOTLS: ${WPMS_SMTP_AUTOTLS}
     volumes:
       - ./scripts:/scripts
       - ./data/wordpress:/var/www/html
@@ -38,8 +46,8 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=reverse-proxy"
       # http
-      - "traefik.http.routers.wordpress-${SLUG}.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.wordpress-${SLUG}.entrypoints=web"
+      - "traefik.http.routers.${SLUG}-wordpress.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${SLUG}-wordpress.entrypoints=web"
 
   mysql:
     image: mariadb
@@ -54,6 +62,23 @@ services:
     # add the network to the service configuration
     networks:
       - backend
+
+  mailhog:
+    image: mailhog/mailhog
+    expose:
+      - 8025
+      - 1025
+    networks:
+      - frontend
+      - backend
+    labels:
+      # enable traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=reverse-proxy"
+      - "traefik.http.services.${SLUG}-mailhog.loadbalancer.server.port=8025"
+      # http
+      - "traefik.http.routers.${SLUG}-mailhog.rule=Host(`mailhog.${DOMAIN}`)"
+      - "traefik.http.routers.${SLUG}-mailhog.entrypoints=web"
 
 volumes:
   mysql:

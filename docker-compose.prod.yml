@@ -27,6 +27,14 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_DEBUG: ${WP_DEBUG}
       WP_URL: ${DOMAIN}
+      WPMS_MAILER: smtp
+      WPMS_SMTP_HOST: ${WPMS_SMTP_HOST}
+      WPMS_SMTP_PORT: ${WPMS_SMTP_PORT}
+      WPMS_SSL: ${WPMS_SSL}
+      WPMS_SMTP_AUTH: ${WPMS_SMTP_AUTH}
+      WPMS_SMTP_USER: ${WPMS_SMTP_USER}
+      WPMS_SMTP_PASS: ${WPMS_SMTP_PASS}
+      WPMS_SMTP_AUTOTLS: ${WPMS_SMTP_AUTOTLS}
     volumes:
       - ./scripts:/scripts
       - ./data/wordpress:/var/www/html
