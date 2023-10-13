@@ -21,3 +21,6 @@ RUN echo '' >> /usr/src/wordpress/.htaccess && \
     echo '</Files>' >> /usr/src/wordpress/.htaccess && \
     echo '# END: Disable XML-RPC' >> /usr/src/wordpress/.htaccess && \
     echo '' >> /usr/src/wordpress/.htaccess
+
+# Add custo php ini config
+COPY custom.ini $PHP_INI_DIR/conf.d/

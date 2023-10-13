@@ -13,12 +13,29 @@ select yn in "yes" "no"; do
     case $yn in
         yes)
             echo -e "Cleaning up wordpress files ..."
-            find ./data/wordpress/{*,} \! -name ".gitignore" -delete
+            rm -r ./data/wordpress/*
             echo -e "${SUCCESS}Cleaned ./data/wordpress directory ✅${NC}"
             break
             ;;
         *)
             echo -e "${SUCCESS}Ok. Not cleaning wordpress files ... ✅${NC}"
+            break
+            ;;
+    esac
+done
+
+# Prune containers
+echo -e "${WARN}Run docker prune?${NC}"
+select yn in "yes" "no"; do
+    case $yn in
+        yes)
+            echo -e "Running docker prune ..."
+            docker system prune --volumes --all --force
+            echo -e "${SUCCESS}Docker prune done! ✅${NC}"
+            break
+            ;;
+        *)
+            echo -e "${SUCCESS}Ok. Not running docker prune ... ✅${NC}"
             break
             ;;
     esac
